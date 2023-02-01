@@ -7,7 +7,7 @@ require('../extended/to-capitalize')
 create({
     sessionId: "BOT_RPG",
     multiDevice: true,
-    useChrome: false,
+    useChrome: true,
     authTimeout: 0,
     blockCrashLogs: true,
     disableSpins: true,
