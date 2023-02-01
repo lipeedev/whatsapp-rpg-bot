@@ -1,0 +1,7 @@
+.vscode
+node_modules
+.env
+*-lock
+*.lock
+.yarn
+*.yml

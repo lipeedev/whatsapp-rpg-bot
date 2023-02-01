@@ -1,0 +1,16 @@
+{
+  "packageManager": "yarn@1.22.19",
+  "name": "whatsapp-bot-rpg",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "@open-wa/wa-automate": "^4.55.2",
+    "dotenv": "^16.0.3",
+    "mongoose": "^6.8.4"
+  }
+}
