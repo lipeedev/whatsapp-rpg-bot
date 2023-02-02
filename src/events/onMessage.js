@@ -12,6 +12,10 @@ module.exports = {
             return;
         }
 
+        if (!message.body.startsWith(client.bot.prefix)) {
+            return;
+        }
+
         const args = message.body.slice(client.bot.prefix.length).trim().split(/ +/g);
         const command = args.shift().toLowerCase();
 
