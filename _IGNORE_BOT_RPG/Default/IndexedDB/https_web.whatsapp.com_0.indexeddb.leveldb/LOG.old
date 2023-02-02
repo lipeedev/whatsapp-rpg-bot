@@ -1,90 +1,21 @@
-2023/01/30-21:51:45.064 2108 Reusing MANIFEST C:\Users\Leep8\OneDrive\Documentos\Programacao\Typescript\whatsapp-bot-rpg\_IGNORE_BOT_RPG\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2023/01/30-21:51:45.067 2108 Recovering log #558
-2023/01/30-21:51:45.350 2108 Reusing old log C:\Users\Leep8\OneDrive\Documentos\Programacao\Typescript\whatsapp-bot-rpg\_IGNORE_BOT_RPG\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000558.log 
-2023/01/30-21:51:45.352 2108 Delete type=2 #548
-2023/01/30-21:51:45.352 2108 Delete type=2 #549
-2023/01/30-21:51:45.352 2108 Delete type=2 #550
-2023/01/30-21:51:45.352 2108 Delete type=2 #551
-2023/01/30-21:51:45.352 2108 Delete type=2 #552
-2023/01/30-21:51:45.352 2108 Delete type=2 #553
-2023/01/30-21:51:45.355 2108 Delete type=2 #554
-2023/01/30-21:51:45.355 2108 Delete type=2 #555
-2023/01/30-21:51:45.355 2108 Delete type=2 #556
-2023/01/30-21:51:45.355 2108 Delete type=2 #559
-2023/01/30-21:52:37.012 b40 Level-0 table #571: started
-2023/01/30-21:52:37.659 b40 Level-0 table #571: 1540093 bytes OK
-2023/01/30-21:52:37.725 b40 Delete type=0 #558
-2023/01/30-21:52:38.242 b40 Compacting 1@1 + 9@2 files
-2023/01/30-21:52:40.030 b40 Generated table #572@1: 27706 keys, 2262029 bytes
-2023/01/30-21:52:42.060 b40 Generated table #573@1: 22566 keys, 2280872 bytes
-2023/01/30-21:52:44.338 b40 Generated table #574@1: 22019 keys, 2272221 bytes
-2023/01/30-21:52:46.130 b40 Generated table #575@1: 22458 keys, 2268340 bytes
-2023/01/30-21:52:48.763 b40 Generated table #576@1: 32859 keys, 2270837 bytes
-2023/01/30-21:52:50.286 b40 Generated table #577@1: 89738 keys, 2262268 bytes
-2023/01/30-21:52:51.656 b40 Generated table #578@1: 13706 keys, 2303179 bytes
-2023/01/30-21:52:53.074 b40 Generated table #579@1: 16321 keys, 2200955 bytes
-2023/01/30-21:52:54.322 b40 Generated table #580@1: 63171 keys, 1823073 bytes
-2023/01/30-21:52:54.322 b40 Compacted 1@1 + 9@2 files => 19943774 bytes
-2023/01/30-21:52:54.375 b40 compacted to: files[ 0 0 9 0 0 0 0 ]
-2023/01/30-21:52:58.696 1b9c Level-0 table #582: started
-2023/01/30-21:52:59.522 1b9c Level-0 table #582: 1445198 bytes OK
-2023/01/30-21:52:59.594 1b9c Delete type=2 #560
-2023/01/30-21:52:59.594 1b9c Delete type=2 #561
-2023/01/30-21:52:59.595 1b9c Delete type=2 #562
-2023/01/30-21:52:59.597 1b9c Delete type=2 #563
-2023/01/30-21:52:59.598 1b9c Delete type=2 #564
-2023/01/30-21:52:59.598 1b9c Delete type=2 #565
-2023/01/30-21:52:59.599 1b9c Delete type=2 #566
-2023/01/30-21:52:59.600 1b9c Delete type=2 #567
-2023/01/30-21:52:59.601 1b9c Delete type=2 #568
-2023/01/30-21:52:59.601 1b9c Delete type=0 #570
-2023/01/30-21:52:59.602 1b9c Delete type=2 #571
-2023/01/30-21:53:00.375 1b9c Compacting 1@1 + 9@2 files
-2023/01/30-21:53:02.885 1b9c Generated table #583@1: 28001 keys, 2262721 bytes
-2023/01/30-21:53:05.330 1b9c Generated table #584@1: 22596 keys, 2281579 bytes
-2023/01/30-21:53:07.811 1b9c Generated table #585@1: 22054 keys, 2269409 bytes
-2023/01/30-21:53:09.842 1b9c Generated table #586@1: 22312 keys, 2271324 bytes
-2023/01/30-21:53:12.406 1b9c Generated table #587@1: 30478 keys, 2271048 bytes
-2023/01/30-21:53:14.240 1b9c Generated table #588@1: 92821 keys, 2243849 bytes
-2023/01/30-21:53:15.462 1b9c Generated table #589@1: 14838 keys, 2325866 bytes
-2023/01/30-21:53:17.051 1b9c Generated table #590@1: 8148 keys, 2177446 bytes
-2023/01/30-21:53:18.584 1b9c Generated table #591@1: 63851 keys, 2230133 bytes
-2023/01/30-21:53:19.019 1b9c Generated table #592@1: 9481 keys, 211521 bytes
-2023/01/30-21:53:19.019 1b9c Compacted 1@1 + 9@2 files => 20544896 bytes
-2023/01/30-21:53:19.140 1b9c compacted to: files[ 0 0 10 0 0 0 0 ]
-2023/01/30-21:53:19.144 1b9c Delete type=2 #572
-2023/01/30-21:53:19.144 1b9c Delete type=2 #573
-2023/01/30-21:53:19.145 1b9c Delete type=2 #574
-2023/01/30-21:53:19.145 1b9c Delete type=2 #575
-2023/01/30-21:53:19.147 1b9c Delete type=2 #576
-2023/01/30-21:53:19.147 1b9c Delete type=2 #577
-2023/01/30-21:53:19.148 1b9c Delete type=2 #578
-2023/01/30-21:53:19.148 1b9c Delete type=2 #579
-2023/01/30-21:53:19.149 1b9c Delete type=2 #580
-2023/01/30-21:53:19.149 1b9c Delete type=2 #582
-2023/01/30-21:53:22.695 1b9c Level-0 table #594: started
-2023/01/30-21:53:23.620 1b9c Level-0 table #594: 1320607 bytes OK
-2023/01/30-21:53:23.670 1b9c Delete type=0 #581
-2023/01/30-21:53:23.737 132c Compacting 1@1 + 9@2 files
-2023/01/30-21:53:25.432 132c Generated table #595@1: 28566 keys, 2263829 bytes
-2023/01/30-21:53:26.978 132c Generated table #596@1: 22468 keys, 2282015 bytes
-2023/01/30-21:53:28.213 132c Generated table #597@1: 22052 keys, 2272517 bytes
-2023/01/30-21:53:29.402 132c Generated table #598@1: 22190 keys, 2270389 bytes
-2023/01/30-21:53:30.519 132c Generated table #599@1: 27643 keys, 2272844 bytes
-2023/01/30-21:53:32.042 132c Generated table #600@1: 92811 keys, 2243439 bytes
-2023/01/30-21:53:33.439 132c Generated table #601@1: 20298 keys, 2341718 bytes
-2023/01/30-21:53:34.311 132c Generated table #602@1: 5867 keys, 2161456 bytes
-2023/01/30-21:53:35.883 132c Generated table #603@1: 51689 keys, 2231745 bytes
-2023/01/30-21:53:36.359 132c Generated table #604@1: 15916 keys, 324869 bytes
-2023/01/30-21:53:36.359 132c Compacted 1@1 + 9@2 files => 20664821 bytes
-2023/01/30-21:53:36.429 132c compacted to: files[ 0 0 11 0 0 0 0 ]
-2023/01/30-21:53:36.437 132c Delete type=2 #583
-2023/01/30-21:53:36.439 132c Delete type=2 #584
-2023/01/30-21:53:36.440 132c Delete type=2 #585
-2023/01/30-21:53:36.441 132c Delete type=2 #586
-2023/01/30-21:53:36.443 132c Delete type=2 #587
-2023/01/30-21:53:36.443 132c Delete type=2 #588
-2023/01/30-21:53:36.452 132c Delete type=2 #589
-2023/01/30-21:53:36.452 132c Delete type=2 #590
-2023/01/30-21:53:36.453 132c Delete type=2 #591
-2023/01/30-21:53:36.453 132c Delete type=2 #594
+2023/02/02-20:36:28.524 1acc Reusing MANIFEST C:\Users\Leep8\OneDrive\Documentos\Programacao\Typescript\whatsapp-bot-rpg\_IGNORE_BOT_RPG\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2023/02/02-20:36:28.526 1acc Recovering log #34
+2023/02/02-20:36:28.692 1acc Reusing old log C:\Users\Leep8\OneDrive\Documentos\Programacao\Typescript\whatsapp-bot-rpg\_IGNORE_BOT_RPG\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000034.log 
+2023/02/02-20:36:29.350 2570 Level-0 table #39: started
+2023/02/02-20:36:29.692 2570 Level-0 table #39: 1201857 bytes OK
+2023/02/02-20:36:29.729 2570 Delete type=0 #34
+2023/02/02-20:36:40.615 259c Compacting 1@0 + 1@1 files
+2023/02/02-20:36:41.481 259c Generated table #40@0: 66675 keys, 1792457 bytes
+2023/02/02-20:36:41.581 259c Compacted 1@0 + 1@1 files => 1792457 bytes
+2023/02/02-20:36:41.637 259c compacted to: files[ 0 1 1 0 0 0 0 ]
+2023/02/02-20:36:41.639 259c Delete type=2 #36
+2023/02/02-20:36:41.639 259c Delete type=2 #39
+2023/02/02-20:37:13.793 259c Level-0 table #42: started
+2023/02/02-20:37:14.052 259c Level-0 table #42: 1101452 bytes OK
+2023/02/02-20:37:14.117 259c Delete type=0 #38
+2023/02/02-20:37:14.717 2778 Compacting 1@0 + 1@1 files
+2023/02/02-20:37:15.481 2778 Generated table #43@0: 75097 keys, 1580711 bytes
+2023/02/02-20:37:15.481 2778 Compacted 1@0 + 1@1 files => 1580711 bytes
+2023/02/02-20:37:15.517 2778 compacted to: files[ 0 1 1 0 0 0 0 ]
+2023/02/02-20:37:15.518 2778 Delete type=2 #40
+2023/02/02-20:37:15.519 2778 Delete type=2 #42
