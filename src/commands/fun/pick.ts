@@ -7,8 +7,10 @@ const getRandomProduct = (args: string[]) => {
     const products = productsDefaultList.default.filter(product => product.category === 'resource');
     const choosedProduct = products.find(product => product.type === args[0].toLowerCase());
 
-    const amount = generateRandomNumber(250);
+    let amount = generateRandomNumber(250);
     let productValue;
+   
+    if (args[0]?.toLowerCase() === 'ervas') amount = generateRandomNumber(30);    
 
     if (choosedProduct.isSingle) {
         productValue = choosedProduct.value;
@@ -33,7 +35,7 @@ export default class PickCommand extends Command {
             args: true,
             usage: 'produto',
             optionalArgs: false,
-            examples: ['madeira', 'pedra', 'carne', 'mineração', 'grãos', 'frutas'],
+            examples: ['madeira', 'pedra', 'carne', 'mineração', 'grãos', 'frutas', 'ervas'],
             description: 'Coleta produtos através de tarefas.',
             isRegisterRequired: false,
         })
