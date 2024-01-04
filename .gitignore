@@ -6,3 +6,5 @@ node_modules
 .yarn
 *.yml
 src/database
+src/structures/Database*
+dist
