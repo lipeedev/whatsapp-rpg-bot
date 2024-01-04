@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npx tsx src/start.ts" 
+    "dev": "npx tsx src/start.ts"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +19,7 @@
     "@hapi/boom": "^10.0.1",
     "@whiskeysockets/baileys": "^6.5.0",
     "libsignal": "^2.0.1",
+    "mongoose": "^8.0.3",
     "qrcode-terminal": "^0.12.0"
   }
 }
