@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/express": "^4.17.21",
     "@types/node": "^20.10.6",
     "tsx": "^4.7.0",
     "typescript": "^5.3.3"
@@ -19,6 +20,7 @@
   "dependencies": {
     "@hapi/boom": "^10.0.1",
     "@whiskeysockets/baileys": "^6.5.0",
+    "express": "^4.18.2",
     "libsignal": "^2.0.1",
     "mongoose": "^8.0.3",
     "qrcode-terminal": "^0.12.0"
