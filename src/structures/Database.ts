@@ -1,7 +1,7 @@
 import { Player, Shop } from "../database/schemas";
 import shop from "../utils/shop";
 
-class Database {
+export class Database {
     shopManager: typeof Shop;
     playerManager: typeof Player;
 

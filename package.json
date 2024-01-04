@@ -1,24 +1,24 @@
 {
-  "name": "nodejs",
+  "name": "bot-rpg",
   "version": "1.0.0",
   "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "npx ts-node ./src/start.ts",
-    "build": "tsc"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx tsx src/start.ts" 
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "@adiwajshing/baileys": "^5.0.0",
-    "@hapi/boom": "^10.0.1",
-    "@types/node": "^18.0.6",
-    "mongoose": "^6.9.2",
-    "node-fetch": "^3.2.6",
-    "qrcode-terminal": "^0.12.0",
-    "ts-node": "^10.9.1"
-  },
   "devDependencies": {
-    "typescript": "^4.9.5"
+    "@types/node": "^20.10.6",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@hapi/boom": "^10.0.1",
+    "@whiskeysockets/baileys": "^6.5.0",
+    "libsignal": "^2.0.1",
+    "qrcode-terminal": "^0.12.0"
   }
 }

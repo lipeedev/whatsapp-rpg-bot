@@ -1,5 +1,5 @@
-import makeWASocket, { DisconnectReason, useMultiFileAuthState } from "@adiwajshing/baileys";
-import Logger from "@adiwajshing/baileys/lib/Utils/logger";
+import makeWASocket, { DisconnectReason, useMultiFileAuthState } from "@whiskeysockets/baileys";
+import Logger from "@whiskeysockets/baileys/lib/Utils/logger";
 import { Boom } from '@hapi/boom';
 import path from 'path';
 
@@ -11,7 +11,11 @@ export async function connect() {
   const logger = Logger.child({ })
   logger.level = 'silent';
 
-  const client = makeWASocket({ auth: state, printQRInTerminal: true, logger });
+  const client = makeWASocket({ 
+    auth: state, 
+    printQRInTerminal: true, 
+    logger,
+  });
 
   client.ev.on('connection.update', async ({ connection, lastDisconnect }) => {
       if (connection === 'close') {
@@ -29,3 +33,4 @@ export async function connect() {
 
   return client;
 }
+

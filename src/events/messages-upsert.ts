@@ -1,4 +1,4 @@
-import { MessageUpsertType, proto, WASocket } from '@adiwajshing/baileys';
+import { MessageUpsertType, proto, WASocket } from '@whiskeysockets/baileys';
 import { commands } from '../bot';
 import { botConfig } from '../structures/bot-config';
 import constants from '../utils/constants';
