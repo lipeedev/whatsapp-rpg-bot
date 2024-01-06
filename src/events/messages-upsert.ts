@@ -13,7 +13,8 @@ export default {
   async execute(m: MessageEventObject, client: WASocket) {
     const messageObj = m.messages[0];
 
-    if (messageObj.key.fromMe || !messageObj.key.remoteJid?.endsWith('@g.us')) return;
+    if (messageObj.key.fromMe && messageObj.key.participant !== botConfig.developer.id) return
+    if (!messageObj.key.remoteJid?.endsWith('@g.us')) return;
     if (!messageObj.message?.conversation) return;
     if (!messageObj.message.conversation.startsWith(botConfig.prefix)) return;
 

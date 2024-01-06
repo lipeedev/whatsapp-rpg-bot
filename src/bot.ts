@@ -7,10 +7,7 @@ export const commands = new Map<string, Command>();
 
 export const bot = async () => {
 
-  const client = await connect();
-  console.clear();
-  console.log('connected');
-
+  const client = await connect(); 
   const eventFiles = readdirSync(path.resolve(__dirname, 'events'))
 
   for (const eventFile of eventFiles) {
