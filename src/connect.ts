@@ -37,6 +37,7 @@ export async function connect() {
       else if (connection === 'open') {
         console.clear();
         console.log('client connected')
+        client.sendMessage(botConfig.developer.id, { text: 'connected' })
       }
  
   });
