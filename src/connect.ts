@@ -3,15 +3,15 @@ import Logger from "@whiskeysockets/baileys/lib/Utils/logger";
 import { Boom } from '@hapi/boom';
 import { botConfig } from "./structures";
 
-export async function connect() { 
+export async function connect() {
   const { state, saveCreds } = await useMultiFileAuthState("./cache");
 
-  const logger = Logger.child({ })
+  const logger = Logger.child({})
   logger.level = 'silent';
 
-  const client = makeWASocket({ 
-    auth: state, 
-    printQRInTerminal: false, 
+  const client = makeWASocket({
+    auth: state,
+    printQRInTerminal: false,
     logger,
     syncFullHistory: true,
     browser: Browsers.macOS('Desktop'),
@@ -19,27 +19,27 @@ export async function connect() {
 
   if (!state.creds.registered) {
     setTimeout(async () => {
-      const code = await client.requestPairingCode(botConfig.number)
+      const code = await client.requestPairingCode("557599400589")
       console.log("CODE: ", code)
-    }, 7000)
+    }, 6000)
   }
 
   client.ev.on('connection.update', async ({ connection, lastDisconnect }) => {
-      if (connection === 'close') {
-        const shouldReconnect = (lastDisconnect?.error as Boom)?.output?.statusCode !==
-          DisconnectReason.loggedOut;
+    if (connection === 'close') {
+      const shouldReconnect = (lastDisconnect?.error as Boom)?.output?.statusCode !==
+        DisconnectReason.loggedOut;
 
-        if (shouldReconnect) {
-          await connect();
-        } 
+      if (shouldReconnect) {
+        await connect();
       }
+    }
 
-      else if (connection === 'open') {
-        console.clear();
-        console.log('client connected')
-        client.sendMessage(botConfig.developer.id, { text: 'connected' })
-      }
- 
+    else if (connection === 'open') {
+      console.clear();
+      console.log('[CLIENT] connected ✅')
+      client.sendMessage(botConfig.developer.id, { text: 'connected' })
+    }
+
   });
 
   client.ev.on('creds.update', saveCreds);
