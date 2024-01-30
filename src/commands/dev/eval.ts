@@ -14,7 +14,7 @@ export default class EvalCommand extends Command {
   }
   async execute({ client, messageObj, args }: CommandExecuteOptions) {
     try {
-      const code = args.join(' ')
+      const code = args.join(' ').trim();
       const output = inspect(eval(code), { depth: 5 })
       const msgTitle = '```</> [CONSOLE] 🧑🏻‍💻```\n*--------------------*'
 

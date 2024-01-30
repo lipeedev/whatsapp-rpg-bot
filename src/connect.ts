@@ -19,7 +19,7 @@ export async function connect() {
 
   if (!state.creds.registered) {
     setTimeout(async () => {
-      const code = await client.requestPairingCode("557599400589")
+      const code = await client.requestPairingCode(botConfig.number)
       console.log("CODE: ", code)
     }, 6000)
   }
