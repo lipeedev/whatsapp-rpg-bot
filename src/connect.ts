@@ -14,7 +14,7 @@ export async function connect() {
     printQRInTerminal: false,
     logger,
     syncFullHistory: true,
-    browser: Browsers.macOS('Desktop'),
+    browser: Browsers.ubuntu('Chrome')
   });
 
   if (!state.creds.registered) {
