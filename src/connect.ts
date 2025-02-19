@@ -1,7 +1,10 @@
-import makeWASocket, { Browsers, DisconnectReason, useMultiFileAuthState } from "@whiskeysockets/baileys";
+import makeWASocket, { Browsers, DisconnectReason, makeInMemoryStore, useMultiFileAuthState } from "@whiskeysockets/baileys";
 import Logger from "@whiskeysockets/baileys/lib/Utils/logger";
 import { Boom } from '@hapi/boom';
 import { botConfig } from "./structures";
+import { updateContacts } from "./utils";
+
+export type InMemoryDataStore = ReturnType<typeof makeInMemoryStore>
 
 export async function connect() {
   const { state, saveCreds } = await useMultiFileAuthState("./cache");
@@ -13,9 +16,16 @@ export async function connect() {
     auth: state,
     printQRInTerminal: false,
     logger,
-    syncFullHistory: true,
+    syncFullHistory: false,
     browser: Browsers.ubuntu('Chrome')
   });
+
+  const store = makeInMemoryStore({
+    logger,
+    socket: client
+  })
+
+  store.bind(client.ev)
 
   if (!state.creds.registered) {
     setTimeout(async () => {
@@ -29,6 +39,7 @@ export async function connect() {
       const shouldReconnect = (lastDisconnect?.error as Boom)?.output?.statusCode !==
         DisconnectReason.loggedOut;
 
+
       if (shouldReconnect) {
         await connect();
       }
@@ -37,13 +48,15 @@ export async function connect() {
     else if (connection === 'open') {
       console.clear();
       console.log('[CLIENT] connected ✅')
-      client.sendMessage(botConfig.developer.id, { text: 'connected' })
     }
 
   });
 
   client.ev.on('creds.update', saveCreds);
+  client.ev.on('contacts.upsert', contacts => {
+    updateContacts(contacts.map(c => ({ id: c.id, name: c.name })))
+  })
 
-  return client;
+  return { client, store };
 }
 

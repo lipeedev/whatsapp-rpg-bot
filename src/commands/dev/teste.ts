@@ -1,41 +1,72 @@
-import { proto } from "@whiskeysockets/baileys";
-import { Command, CommandExecuteOptions } from "../../structures"
-import { Collector } from "../../structures/Collector"
+import { Board, Command, CommandExecuteOptions, Player } from "../../structures"
+import constants from "../../utils/constants"
+import { setTimeout as delay } from 'node:timers/promises'
+import { collectAnswer } from "../../utils"
 
 export default class EvalCommand extends Command {
   constructor() {
     super({
       name: 'teste',
       aliases: ['t'],
-      description: 'comando de testes para desenvolvimento.',
-      isRegisterRequired: false,
+      description: 'teste sem descrição...',
       args: false,
       dev: true,
     })
   }
 
-  async execute({ client, messageObj, args }: CommandExecuteOptions) {
-    const collector = new Collector(client, {
-      filter: m => m.message.conversation === 'lipekk' && m.key.remoteJid === messageObj.key.remoteJid,
-      time: 2_000
+  async execute({ client, messageObj, args, store }: CommandExecuteOptions) {
+    const minutesToAnswer = 1
+
+    await client.sendMessage(messageObj.key.remoteJid!, {
+      text: constants.questionNicknameForBoard(minutesToAnswer)
     })
 
-    collector.create();
+    await delay(300)
 
-    collector.on('collect', (m: proto.IWebMessageInfo) => {
-      client.sendMessage(messageObj.key.remoteJid, {
-        text: `msg coletada: ${m.message.conversation}`
+    const msgObjFromPlayer = await collectAnswer({
+      client,
+      minutesToAnswer,
+      groupId: messageObj.key.remoteJid,
+      targetUserId: messageObj.key.remoteJid!
+    }).catch((err: Error) => err)
+
+    if (msgObjFromPlayer instanceof Error) {
+      await client.sendMessage(messageObj.key.remoteJid!, {
+        text: msgObjFromPlayer.message
       })
+      return;
+    }
+
+    await client.sendMessage(messageObj.key.remoteJid!, {
+      text: constants.questionEnemyNicknameForBoard(minutesToAnswer)
     })
 
+    await delay(300)
 
-    collector.on('end', (m: proto.IWebMessageInfo[]) => {
-      if (!m.length) return client.sendMessage(messageObj.key.remoteJid, { text: 'sem msg coletada' });
+    const msgObjFromEnemy = await collectAnswer({
+      client,
+      groupId: messageObj.key.remoteJid,
+      minutesToAnswer,
+      targetUserId: 'anyone'
+    }).catch((err: Error) => err)
 
-      client.sendMessage(messageObj.key.remoteJid, {
-        text: `msg coletada END: ${m[0].message.conversation}`
+    if (msgObjFromEnemy instanceof Error) {
+      await client.sendMessage(messageObj.key.remoteJid!, {
+        text: msgObjFromEnemy.message
       })
+      return;
+    }
+
+    const board = new Board({
+      groupId: messageObj.key.remoteJid!,
+      client,
+      players: [
+        new Player({ id: msgObjFromPlayer.key.remoteJid!, nickname: msgObjFromPlayer.message.conversation!, hp: 200, ck: 400 }),
+        new Player({ id: msgObjFromEnemy.key.remoteJid!, nickname: msgObjFromEnemy.message.conversation!, hp: 200, ck: 400 })
+      ]
     })
 
+    await board.startFight();
   }
 };
+

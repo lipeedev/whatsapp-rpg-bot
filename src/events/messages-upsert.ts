@@ -2,7 +2,7 @@ import { MessageUpsertType, proto, WASocket } from '@whiskeysockets/baileys';
 import { commands } from '../bot';
 import { botConfig } from '../structures/bot-config';
 import constants from '../utils/constants';
-import { PlayerSchema } from '../database/schemas';
+import { InMemoryDataStore } from '../connect';
 
 type MessageEventObject = {
   messages: proto.IWebMessageInfo[],
@@ -11,7 +11,7 @@ type MessageEventObject = {
 
 export default {
   name: 'messages.upsert',
-  async execute(m: MessageEventObject, client: WASocket) {
+  async execute(m: MessageEventObject, client: WASocket, store: InMemoryDataStore) {
     const messageObj = m.messages[0];
 
     if (messageObj.key.fromMe && messageObj.key.participant !== botConfig.developer.id) return
@@ -37,19 +37,7 @@ export default {
         return;
       }
 
-      if (command.isRegisterRequired) {
-        const playerOnDatabase = await PlayerSchema.findById(messageObj.key.participant);
-        if (!playerOnDatabase) {
-          const player = await PlayerSchema.create({
-            _id: messageObj.key.participant,
-            name: messageObj.pushName
-          })
-
-          await player.save()
-        }
-      }
-
-      await command.execute({ client, messageObj, args });
+      await command.execute({ client, messageObj, args, store });
     } catch (err) {
       await client.sendMessage(
         messageObj.key.remoteJid,

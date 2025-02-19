@@ -7,12 +7,11 @@ export default class EvalCommand extends Command {
       name: 'eval',
       aliases: ['ev'],
       description: 'comando de testes para desenvolvimento.',
-      isRegisterRequired: false,
       args: true,
       dev: true,
     })
   }
-  async execute({ client, messageObj, args }: CommandExecuteOptions) {
+  async execute({ client, messageObj, args, store }: CommandExecuteOptions) {
     try {
       const code = args.join(' ').trim();
       const output = inspect(eval(code), { depth: 5 })

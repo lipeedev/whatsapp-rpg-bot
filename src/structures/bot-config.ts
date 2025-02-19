@@ -1,5 +1,5 @@
 export const botConfig = {
-  prefix: "/",
+  prefix: "s!",
   id: "557599400589@s.whatsapp.net",
   number: "557599400589",
   name: "RPG BOT",
