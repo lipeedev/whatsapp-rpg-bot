@@ -53,6 +53,9 @@ export async function connect() {
   });
 
   client.ev.on('creds.update', saveCreds);
+  client.ev.on('contacts.update', contacts => {
+    updateContacts(contacts.map(c => ({ id: c.id, name: c.name })))
+  })
   client.ev.on('contacts.upsert', contacts => {
     updateContacts(contacts.map(c => ({ id: c.id, name: c.name })))
   })

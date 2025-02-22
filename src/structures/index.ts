@@ -1,4 +1,4 @@
 export * from './bot-config'
 export * from './Command'
-export * from './Board'
-export * from './Player'
+export * from './CasinoRoulette'
+export * from './prisma'

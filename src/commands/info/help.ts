@@ -15,7 +15,7 @@ export default class HelpCommand extends Command {
     })
   }
 
-  async execute({ client, messageObj, args, store }: CommandExecuteOptions) {
+  async execute({ client, messageObj, args }: CommandExecuteOptions) {
     if (args[0]) {
       const commandName = args[0].toLowerCase();
       const commandData = commands.get(commandName) ?? [...commands.values()].find(cmd => cmd.aliases?.includes(commandName));

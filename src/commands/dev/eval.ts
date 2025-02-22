@@ -11,15 +11,15 @@ export default class EvalCommand extends Command {
       dev: true,
     })
   }
-  async execute({ client, messageObj, args, store }: CommandExecuteOptions) {
+  async execute({ client, messageObj, args }: CommandExecuteOptions) {
     try {
       const code = args.join(' ').trim();
       const output = inspect(eval(code), { depth: 5 })
-      const msgTitle = '```</> [CONSOLE] 🧑🏻‍💻```\n*--------------------*'
+      const msgTitle = '`</> [CONSOLE] 🧑🏻‍💻`\n*--------------------*'
 
       await client.sendMessage(messageObj.key.remoteJid!, { text: `${msgTitle}\n\n${output}` }, { quoted: messageObj });
     } catch (err) {
-      const msgTitleError = '```</> [CONSOLE - ERRO] ❌```\n*--------------------*'
+      const msgTitleError = '`</> [CONSOLE - ERROR] ❌`\n*--------------------*'
 
       await client.sendMessage(messageObj.key.remoteJid!, { text: `${msgTitleError}\n\n${String(err)}` }, { quoted: messageObj });
 

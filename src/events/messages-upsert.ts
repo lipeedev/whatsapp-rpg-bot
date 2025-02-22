@@ -3,11 +3,14 @@ import { commands } from '../bot';
 import { botConfig } from '../structures/bot-config';
 import constants from '../utils/constants';
 import { InMemoryDataStore } from '../connect';
+import { prisma } from '../structures';
 
 type MessageEventObject = {
   messages: proto.IWebMessageInfo[],
   type: MessageUpsertType
 }
+
+const cachedPlayers: string[] = []
 
 export default {
   name: 'messages.upsert',
@@ -16,6 +19,21 @@ export default {
 
     if (messageObj.key.fromMe && messageObj.key.participant !== botConfig.developer.id) return
     if (!messageObj.key.remoteJid?.endsWith('@g.us')) return;
+
+    if (!cachedPlayers.includes(messageObj.key.participant)) {
+      const alreadyRegistered = await prisma.player.findUnique({
+        where: { id: messageObj.key.participant }
+      })
+
+      if (!alreadyRegistered) {
+        await prisma.player.create({
+          data: { id: messageObj.key.participant }
+        })
+      }
+
+      cachedPlayers.push(messageObj.key.participant)
+    }
+
     if (!messageObj.message?.conversation) return;
     if (!messageObj.message.conversation.startsWith(botConfig.prefix)) return;
 
