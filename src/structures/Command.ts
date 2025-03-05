@@ -18,6 +18,7 @@ export interface CommandOptions {
   isRegisterRequired?: boolean;
   optionalArgs?: boolean;
   dev?: boolean;
+  requiredMinimumLevel?: number
 }
 
 export class Command {
@@ -29,7 +30,9 @@ export class Command {
   examples?: string[]
   isRegisterRequired?: boolean
   optionalArgs?: boolean;
-  dev?: boolean;
+  dev?: boolean
+  requiredMinimumLevel?: number
+
 
   constructor(props: CommandOptions) {
     Object.assign(this, props);

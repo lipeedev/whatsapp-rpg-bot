@@ -1,5 +1,5 @@
-import { CasinoRoulette, Command, CommandExecuteOptions, prisma } from "../../structures"
-import { addPlayerStars, addPlayerXP, removePlayerStars } from "../../utils"
+import { CasinoRoulette, Command, CommandExecuteOptions, potionEffects, PotionEffectType, prisma } from "../../structures"
+import { addPlayerStars, addPlayerXP, changePlayerEffect, removePlayerStars } from "../../utils"
 import constants from "../../utils/constants"
 
 export default class JackpotCommand extends Command {
@@ -18,6 +18,7 @@ export default class JackpotCommand extends Command {
       where: { id: messageObj.key.participant }
     })
 
+    const activePlayerEffect = potionEffects.find(p => p.description === playerInfoFromDatabase.effect)
     const amountFromPlayer = Number(args[0])
 
     if (isNaN(amountFromPlayer) || amountFromPlayer < 1) {
@@ -45,10 +46,28 @@ export default class JackpotCommand extends Command {
 
     if (result.win) {
       points = Math.floor(amountFromPlayer * odd)
+
+      if (activePlayerEffect?.type === PotionEffectType.WinExtraStars) {
+        const starBonusFromEffect = Math.floor(Math.random() * 100) + 1
+        points += starBonusFromEffect
+        await changePlayerEffect(messageObj.key.participant, { description: 'Nenhum' })
+      }
+
+      if (activePlayerEffect?.type === PotionEffectType.MultiplyRewards) {
+        points *= 2
+        await changePlayerEffect(messageObj.key.participant, { description: 'Nenhum' })
+      }
+
       await addPlayerStars(messageObj.key.participant, points)
     }
     else {
       points = amountFromPlayer
+
+      if (activePlayerEffect?.type === PotionEffectType.DontLoseStars) {
+        points = 0;
+        await changePlayerEffect(messageObj.key.participant, { description: 'Nenhum' })
+      }
+
       await removePlayerStars(messageObj.key.participant, points)
     }
 

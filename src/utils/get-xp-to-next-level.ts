@@ -3,6 +3,6 @@ type GetXpToNextLevelParams = {
 }
 
 export function getXpToNextLevel({ currentLevel }: GetXpToNextLevelParams) {
-  return currentLevel * 200
+  return currentLevel * 150
 
 }

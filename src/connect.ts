@@ -1,4 +1,6 @@
 import makeWASocket, { Browsers, DisconnectReason, makeInMemoryStore, useMultiFileAuthState } from "@whiskeysockets/baileys";
+import { spawn } from 'child_process';
+import * as process from 'process';
 import Logger from "@whiskeysockets/baileys/lib/Utils/logger";
 import { Boom } from '@hapi/boom';
 import { botConfig } from "./structures";
@@ -39,14 +41,16 @@ export async function connect() {
       const shouldReconnect = (lastDisconnect?.error as Boom)?.output?.statusCode !==
         DisconnectReason.loggedOut;
 
+      console.log('[CLIENT] disconnected ❌')
+
 
       if (shouldReconnect) {
-        await connect();
+        console.log('[CLIENT] reconnecting...')
+        restartApplication()
       }
     }
 
     else if (connection === 'open') {
-      console.clear();
       console.log('[CLIENT] connected ✅')
     }
 
@@ -54,7 +58,7 @@ export async function connect() {
 
   client.ev.on('creds.update', saveCreds);
   client.ev.on('contacts.update', contacts => {
-    updateContacts(contacts.map(c => ({ id: c.id, name: c.name })))
+    updateContacts(contacts.map(c => ({ id: c.id!, name: c.name })))
   })
   client.ev.on('contacts.upsert', contacts => {
     updateContacts(contacts.map(c => ({ id: c.id, name: c.name })))
@@ -63,3 +67,12 @@ export async function connect() {
   return { client, store };
 }
 
+function restartApplication() {
+  spawn('tsx', process.argv.slice(1), {
+    stdio: 'inherit',
+    detached: true
+  });
+
+  process.stdin.pause()
+  process.exit();
+}

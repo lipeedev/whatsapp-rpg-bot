@@ -57,6 +57,7 @@ export default {
 
       await command.execute({ client, messageObj, args, store });
     } catch (err) {
+      console.error(err)
       await client.sendMessage(
         messageObj.key.remoteJid,
         { text: constants.genericErrorMessage(botConfig, err as Error) },

@@ -1,4 +1,5 @@
 import { prisma } from "../structures";
+import { getMaxHpUpdated } from "./get-max-hp-updated";
 import { getXpToNextLevel } from "./get-xp-to-next-level";
 
 export async function addPlayerXP(id: string, xp: number) {
@@ -15,7 +16,8 @@ export async function addPlayerXP(id: string, xp: number) {
     await prisma.player.update({
       where: { id },
       data: {
-        level: { increment: 1 }
+        level: { increment: 1 },
+        maxHP: getMaxHpUpdated(playerInfoUpdated.level + 1)
       }
     })
 

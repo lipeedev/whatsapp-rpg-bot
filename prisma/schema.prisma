@@ -8,8 +8,48 @@ datasource db {
 }
 
 model Player {
-  id    String @id
-  stars Int    @default(0)
-  xp    Int    @default(0)
-  level Int    @default(1)
+  id             String      @id
+  hp             Int         @default(200)
+  maxHP          Int         @default(200)
+  stars          Int         @default(0)
+  xp             Int         @default(0)
+  effect         String      @default("Nenhum")
+  level          Int         @default(1)
+  items          Item[]
+  equippedShield String?
+  equippedWeapon String?
+  equipments     Equipment[]
+  potions        Potion[]
+}
+
+model Equipment {
+  id         String  @unique @default(cuid())
+  name       String
+  damage     Int?
+  protection Int?
+  Player     Player? @relation(fields: [playerId], references: [id])
+  playerId   String?
+
+  @@unique([playerId, name])
+}
+
+model Item {
+  id       String  @unique @default(cuid())
+  name     String
+  count    Int
+  Player   Player? @relation(fields: [playerId], references: [id])
+  playerId String?
+
+  @@unique([playerId, name])
+}
+
+model Potion {
+  id       String  @unique @default(cuid())
+  name     String
+  count    Int
+  effect   String
+  Player   Player? @relation(fields: [playerId], references: [id])
+  playerId String?
+
+  @@unique([playerId, name])
 }
