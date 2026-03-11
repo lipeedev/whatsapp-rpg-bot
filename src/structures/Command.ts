@@ -1,11 +1,9 @@
 import { proto, WASocket } from "@whiskeysockets/baileys";
-import { InMemoryDataStore } from "../connect";
 
 export interface CommandExecuteOptions {
   client: WASocket
   messageObj: proto.IWebMessageInfo
   args: string[],
-  store: InMemoryDataStore
 }
 
 export interface CommandOptions {

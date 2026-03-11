@@ -5,6 +5,8 @@ export async function removePotionFromPlayer(playerId: string, potionName: strin
     where: { playerId, name: potionName },
   });
 
+  if (!potion) return;
+
   if (potion?.count > 1) {
     await prisma.potion.update({
       where: { id: potion.id, playerId },

@@ -1,11 +1,11 @@
 export const botConfig = {
-  prefix: "!",
-  id: "559183411364@s.whatsapp.net",
-  number: "559183411364",
-  name: "Sophy",
+  prefix: "/",
+  id: "103139478864119@lid",
+  number: "557599400589",
+  name: "BOT",
   developer: {
     name: "Filipe",
-    id: "557599400589@s.whatsapp.net",
+    id: "103139478864119@lid",
     number: "557599400589"
   }
 }

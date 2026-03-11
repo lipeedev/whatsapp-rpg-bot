@@ -1,3 +1,4 @@
+import { WAMessage } from "@whiskeysockets/baileys";
 import { badEffects, BadEffectType, Command, CommandExecuteOptions, potionEffects, PotionEffectType, prisma } from "../../structures"
 import { addPlayerHP, addPlayerStars, changePlayerEffect, removePlayerStars, removePotionFromPlayer } from "../../utils";
 import constants from "../../utils/constants";
@@ -15,49 +16,49 @@ export default class UseCommand extends Command {
   }
   async execute({ client, messageObj, args }: CommandExecuteOptions) {
     const potionChoosed = args.join(' ');
-    const playerInfoFromDatabase = await prisma.player.findUnique({ where: { id: messageObj.key.participant } })
+    const playerInfoFromDatabase = await prisma.player.findUnique({ where: { id: messageObj.key!.participant! } })
 
     const playerPotionsOnDatabase = await prisma.potion.findMany({
-      where: { playerId: messageObj.key.participant }
+      where: { playerId: messageObj.key!.participant! }
     })
 
     const potionOnPlayerInventory = playerPotionsOnDatabase.find(p => p.name.toLowerCase() === potionChoosed.toLowerCase())
 
     if (!potionOnPlayerInventory) {
-      await client.sendMessage(messageObj.key.remoteJid!, {
+      await client.sendMessage(messageObj.key!.remoteJid!, {
         text: constants.notFoundItemOnInventory
-      }, { quoted: messageObj })
+      }, { quoted: messageObj as WAMessage })
       return
     }
 
     const potionEffectFound = potionEffects.find(e => e.description.toLowerCase() === potionOnPlayerInventory.effect.toLowerCase())
 
-    if (playerInfoFromDatabase.effect !== 'Nenhum' && potionEffectFound.type !== PotionEffectType.UndoCurrentEffect) {
-      await client.sendMessage(messageObj.key.remoteJid!, {
+    if (playerInfoFromDatabase?.effect !== 'Nenhum' && potionEffectFound?.type !== PotionEffectType.UndoCurrentEffect) {
+      await client.sendMessage(messageObj.key!.remoteJid!, {
         text: constants.alreadyHasEffectActivated
-      }, { quoted: messageObj })
+      }, { quoted: messageObj as WAMessage })
       return
     }
 
-    else if (potionEffectFound.type === PotionEffectType.MultiplyShopPrice) {
+    else if (potionEffectFound?.type === PotionEffectType.MultiplyShopPrice) {
       const allPlayers = await prisma.player.findMany({
-        where: { id: { not: messageObj.key.participant } }
+        where: { id: { not: messageObj.key!.participant! } }
       })
 
       const targetRandomPlayer = allPlayers[Math.floor(Math.random() * allPlayers.length)]
       const shopMoreExpensiveEffect = badEffects.find(e => e.type === BadEffectType.MoreExpensiveShop)
-      await changePlayerEffect(targetRandomPlayer.id, shopMoreExpensiveEffect)
+      await changePlayerEffect(targetRandomPlayer.id, shopMoreExpensiveEffect!)
 
-      await client.sendMessage(messageObj.key.remoteJid!, {
+      await client.sendMessage(messageObj.key!.remoteJid!, {
         text: constants.potionUsedInPlayer(targetRandomPlayer.id),
         mentions: [targetRandomPlayer.id]
-      }, { quoted: messageObj })
+      }, { quoted: messageObj as WAMessage })
     }
 
-    else if (potionEffectFound.type === PotionEffectType.EveryoneLoseStars) {
+    else if (potionEffectFound?.type === PotionEffectType.EveryoneLoseStars) {
       const randomStarsCountToLose = Math.floor(Math.random() * 150) + 1;
-      await removeAllPlayerStars(randomStarsCountToLose, messageObj.key.participant)
-      await removePotionFromPlayer(messageObj.key.participant, potionOnPlayerInventory.name)
+      await removeAllPlayerStars(randomStarsCountToLose, messageObj.key!.participant!)
+      await removePotionFromPlayer(messageObj.key!.participant!, potionOnPlayerInventory.name)
 
       await client.sendMessage(messageObj.key.remoteJid!, {
         text: constants.everyoneLosesStars(messageObj.pushName, randomStarsCountToLose),

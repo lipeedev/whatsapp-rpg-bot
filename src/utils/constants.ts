@@ -41,5 +41,6 @@ export default {
   playerDead: (playerJid: string) => `💀 O Jogador @${playerJid.replace('@s.whatsapp.net', '')} morreu!\n> Perdeu todos os itens!`,
   successEquipItem: (itemName: string) => `🪖 *Você equipou um item!*\n> Item: \`${itemName}\``,
   successHpRecover: (hp: number) => `💕 *Vida restaurada*\n> Curou \`${hp} pontos de vida.\``,
-  alreadyHasFullHp: `👩🏻‍🔬🧪 Sua vida já está cheia!`
+  alreadyHasFullHp: `👩🏻‍🔬🧪 Sua vida já está cheia!`,
+  notFoundAnyItem: '[❗] Item inválido!\n> Verifique o nome correto',
 };
