@@ -20,6 +20,9 @@ model Player {
   equippedWeapon String?
   equipments     Equipment[]
   potions        Potion[]
+  mapId          Int         @default(1)
+  mapPositionX   Int         @default(0)
+  mapPositionY   Int         @default(0)
 }
 
 model Equipment {

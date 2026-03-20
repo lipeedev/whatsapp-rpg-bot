@@ -7,12 +7,12 @@ export const commands = new Map<string, Command>();
 
 export const bot = async () => {
 
-  const { client, store } = await connect();
+  const { client } = await connect();
   const eventFiles = readdirSync(path.resolve(__dirname, 'events'))
 
   for (const eventFile of eventFiles) {
     const { default: eventData } = await import(path.resolve(__dirname, 'events', eventFile));
-    client.ev.on(eventData.name, (...args) => eventData.execute(...args, client, store))
+    client.ev.on(eventData.name, (...args) => eventData.execute(...args, client))
   }
 
   const commandFolders = readdirSync(path.resolve(__dirname, 'commands'))

@@ -2,23 +2,23 @@ import { WASocket, proto } from "@whiskeysockets/baileys";
 import EventEmitter from "events";
 
 interface CollectorEvents {
-  'collect': (message: proto.IWebMessageInfo) => void;
-  'end': (collected: proto.IWebMessageInfo[]) => void;
+  'collect': (message: proto.IReaction) => void;
+  'end': (collected: proto.IReaction[]) => void;
 }
 
 type CollectorOptions = {
   client: WASocket;
   groupId: string;
-  filter: (m: proto.IWebMessageInfo) => boolean;
+  filter: (r: proto.IReaction) => boolean;
   time?: number;
   max?: number;
 };
 
-export class MessageCollector extends EventEmitter {
+export class ReactionCollector extends EventEmitter {
   private isEnded = false;
-  private collectedMessages: proto.IWebMessageInfo[] = [];
+  private collectedReactions: proto.IReaction[] = [];
   private max: number;
-  private messageListener: ((m: { messages: proto.IWebMessageInfo[] }) => void) | null = null
+  private reactionListener: ((r: { reaction: proto.IReaction, key: proto.MessageKey }[]) => void) | null = null
 
   constructor(
     private readonly options: CollectorOptions
@@ -32,37 +32,37 @@ export class MessageCollector extends EventEmitter {
       setTimeout(() => this.end(), this.options.time);
     }
 
-    this.messageListener = m => {
+    this.reactionListener = r => {
       if (this.isEnded) return;
 
-      if (this.collectedMessages.length >= this.max) {
+      if (this.collectedReactions.length >= this.max) {
         this.end();
         return;
       }
 
-      const message = m.messages[0];
+      const reaction = r[0].reaction;
 
-      if (this.options.filter(message) && this.options.groupId === message.key!.remoteJid!) {
-        this.collectedMessages.push(message);
-        this.emit("collect", message);
+      if (this.options.filter(reaction) && this.options.groupId === reaction.key!.remoteJid!) {
+        this.collectedReactions.push(reaction);
+        this.emit("collect", reaction);
 
-        if (this.collectedMessages.length >= this.max) {
+        if (this.collectedReactions.length >= this.max) {
           this.end();
         }
       }
     }
 
-    this.options.client.ev.on('messages.upsert', this.messageListener)
+    this.options.client.ev.on('messages.reaction', this.reactionListener)
   }
 
   private end() {
     if (this.isEnded) return;
 
     this.isEnded = true;
-    this.emit("end", this.collectedMessages);
+    this.emit("end", this.collectedReactions);
 
-    if (this.messageListener) {
-      this.options.client.ev.off('messages.upsert', this.messageListener)
+    if (this.reactionListener) {
+      this.options.client.ev.off('messages.reaction', this.reactionListener)
     }
 
     this.removeAllListeners();

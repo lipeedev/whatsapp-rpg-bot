@@ -1,4 +1,5 @@
 import { botConfig } from '../structures/bot-config';
+const whatsappID = "@lid"
 
 export default {
   onlyGroupsMessage: '❕ Meus comandos só estão disponíveis para o uso em grupos!',
@@ -24,21 +25,21 @@ export default {
   invalidPotionCombination: '💔👩🏻‍🔬 Essa combinação não resultou em nada!',
   successGeneratePotion: (potionName: string) => `👩🏻‍🔬 *Parabéns!*\nVocê obteve a poção: \`${potionName}\``,
   notFoundItemOnInventory: '💔👩🏻‍🔬 Você não possui esse item no inventário\n> Verifique o nome correto',
-  successRobbery: (playerJid: string, stars: number) => `🥷🏻 Você acaba de roubar o jogador: @${playerJid.replace('@s.whatsapp.net', '')}\n*Levou ${stars} 🌟!*`,
-  failRobbery: (playerJid: string) => `🛡️Você tentou roubar o jogador: @${playerJid.replace('@s.whatsapp.net', '')} e falhou!`,
+  successRobbery: (playerJid: string, stars: number) => `🥷🏻 Você acaba de roubar o jogador: @${playerJid.replace(whatsappID, '')}\n*Levou ${stars} 🌟!*`,
+  failRobbery: (playerJid: string) => `🛡️Você tentou roubar o jogador: @${playerJid.replace(whatsappID, '')} e falhou!`,
   everyoneLosesStars: (playerName: string, stars: number) => `👩🏻‍🔬🧪  *${playerName}* utilizou uma poção e todos perderam estrelas!\n> Estrelas: -${stars} 🌟  (exceto ${playerName})`,
   removeAllEffects: '👩🏻‍🔬🧪 Efeitos removidos com sucesso!',
   addEffect: (playerName: string) => `👩🏻‍🔬🧪 *${playerName}* utilizou uma poção e obteve efeitos!`,
   alreadyHasEffectActivated: '👩🏻‍🔬 Você já está sob um efeito!\n> Livre-se do efeito atual primeiro',
-  potionUsedInPlayer: (playerJid: string) => `👩🏻‍🔬🧪 Você usou uma poção no jogador: @${playerJid.replace('@s.whatsapp.net', '')}`,
+  potionUsedInPlayer: (playerJid: string) => `👩🏻‍🔬🧪 Você usou uma poção no jogador: @${playerJid.replace(whatsappID, '')}`,
   shopItemNotFound: '❌ Este item não foi encontrado na loja.',
   alreadyHasItem: '❌ Já possui este item no inventário.',
   successBuyItem: (itemName: string) => `🎉 *Você realizou uma compra!*\n> Item: \`${itemName}\``,
   playerNotFound: '❌ Este jogador não foi encontrado ou não tem registros.',
   requiredMinimumLevel: (level: number) => `❌ Você precisa ter no mínimo o *Nível ${level}!*`,
   requiredWeaponEquipped: '🗡️ Equipe uma arma para usar isto!',
-  attackedPlayer: (playerJid: string, hp: number) => `🗡️ Você acaba de atacar o jogador: @${playerJid.replace('@s.whatsapp.net', '')}\n*Causou ${hp} 🔺 de dano!*`,
-  playerDead: (playerJid: string) => `💀 O Jogador @${playerJid.replace('@s.whatsapp.net', '')} morreu!\n> Perdeu todos os itens!`,
+  attackedPlayer: (playerJid: string, hp: number) => `🗡️ Você acaba de atacar o jogador: @${playerJid.replace(whatsappID, '')}\n*Causou ${hp} 🔺 de dano!*`,
+  playerDead: (playerJid: string) => `💀 O Jogador @${playerJid.replace(whatsappID, '')} morreu!\n> Perdeu todos os itens!`,
   successEquipItem: (itemName: string) => `🪖 *Você equipou um item!*\n> Item: \`${itemName}\``,
   successHpRecover: (hp: number) => `💕 *Vida restaurada*\n> Curou \`${hp} pontos de vida.\``,
   alreadyHasFullHp: `👩🏻‍🔬🧪 Sua vida já está cheia!`,

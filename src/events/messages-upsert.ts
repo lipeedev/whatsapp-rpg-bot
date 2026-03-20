@@ -15,7 +15,6 @@ export default {
   name: 'messages.upsert',
   async execute(m: MessageEventObject, client: WASocket) {
     const messageObj = m.messages[0];
-    //console.log(messageObj)
     //if (messageObj.key?.fromMe && messageObj.key.participant !== botConfig.developer.id) return
     if (!messageObj.key?.remoteJid?.endsWith('@g.us')) return;
     if (!messageObj.key.participant) return;

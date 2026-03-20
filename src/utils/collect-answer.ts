@@ -24,7 +24,7 @@ export async function collectAnswer({ filter, groupId, minutesToAnswer, client, 
 
     collector.on('end', m => {
       if (!m.length)
-        reject(new Error(constants.noResponseReceived))
+        reject(new Error(constants.noResponseErrorMessage))
     })
 
     collector.start()

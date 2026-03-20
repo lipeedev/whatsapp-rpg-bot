@@ -21,7 +21,7 @@ export default class EvalCommand extends Command {
       await client.sendMessage(messageObj.key!.remoteJid!, { text: `${msgTitle}\n\n${output}` }, { quoted: messageObj as WAMessage });
     } catch (err) {
       const msgTitleError = '`</> [CONSOLE - ERROR] ❌`\n*--------------------*'
-
+      console.log(err)
       await client.sendMessage(messageObj.key!.remoteJid!, { text: `${msgTitleError}\n\n${String(err)}` }, { quoted: messageObj as WAMessage });
 
     }
