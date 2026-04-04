@@ -16,7 +16,7 @@ export default class TesteCommand extends Command {
     const mapInfo = maps.list.find(m => m.id === 1)
     const mapWithoutChanges = mapInfo.mapAsArray
     const playerEmoji = "🧙🏻‍♂️"
-    const playerPosition = { y: 1, x: 6 }
+    const playerPosition = { y: 0, x: 2 }
 
     let msgMap: WAMessage
     let steps = 15

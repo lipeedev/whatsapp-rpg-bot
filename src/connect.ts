@@ -18,7 +18,7 @@ export async function connect() {
     auth: state,
     printQRInTerminal: false,
     logger,
-    //syncFullHistory: false,
+    syncFullHistory: false,
     shouldSyncHistoryMessage: () => false
   });
 
