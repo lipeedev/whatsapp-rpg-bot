@@ -1,3 +1,4 @@
+import { WAMessage } from "@whiskeysockets/baileys";
 import { commands } from "../../bot";
 import { botConfig, Command, CommandExecuteOptions } from "../../structures";
 import { showCommandInfo } from "../../utils";
@@ -8,6 +9,7 @@ export default class HelpCommand extends Command {
   constructor() {
     super({
       name: 'help',
+      aliases: ['menu'],
       usage: '<nome_do_comando>',
       examples: ['start'],
       optionalArgs: true,
@@ -21,11 +23,11 @@ export default class HelpCommand extends Command {
       const commandData = commands.get(commandName) ?? [...commands.values()].find(cmd => cmd.aliases?.includes(commandName));
 
       if (!commandData) {
-        await client.sendMessage(messageObj.key.remoteJid!, { text: constants.commandNotFoundErrorMessage }, { quoted: messageObj });
+        await client.sendMessage(messageObj.key.remoteJid!, { text: constants.commandNotFoundErrorMessage }, { quoted: messageObj as WAMessage });
         return;
       }
 
-      await client.sendMessage(messageObj.key.remoteJid!, { text: showCommandInfo(commandData) }, { quoted: messageObj });
+      await client.sendMessage(messageObj.key.remoteJid!, { text: showCommandInfo(commandData) }, { quoted: messageObj as WAMessage });
       return;
     }
 

@@ -9,17 +9,23 @@ datasource db {
 
 model Player {
   id             String      @id
-  hp             Int         @default(200)
-  maxHP          Int         @default(200)
+  class          String
+  gender         String
+  hp             Int         @default(100)
+  mp             Int         @default(50)
+  maxHP          Int         @default(100)
+  maxMP          Int         @default(50)
+  skin           String      @default("default")
+  points         Int         @default(0)
   stars          Int         @default(0)
-  xp             Int         @default(0)
-  effect         String      @default("Nenhum")
-  level          Int         @default(1)
+  strength       Int         @default(0)
+  dexterity      Int         @default(0)
+  intelligence   Int         @default(0)
+  lucky          Int         @default(0)
   items          Item[]
+  equipments     Equipment[]
   equippedShield String?
   equippedWeapon String?
-  equipments     Equipment[]
-  potions        Potion[]
   mapId          Int         @default(1)
   mapPositionX   Int         @default(0)
   mapPositionY   Int         @default(0)
@@ -39,18 +45,8 @@ model Equipment {
 model Item {
   id       String  @unique @default(cuid())
   name     String
+  type     String  @default("item")
   count    Int
-  Player   Player? @relation(fields: [playerId], references: [id])
-  playerId String?
-
-  @@unique([playerId, name])
-}
-
-model Potion {
-  id       String  @unique @default(cuid())
-  name     String
-  count    Int
-  effect   String
   Player   Player? @relation(fields: [playerId], references: [id])
   playerId String?
 

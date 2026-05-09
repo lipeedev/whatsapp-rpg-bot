@@ -1,6 +1,6 @@
 import { prisma } from "../structures";
 
-export async function addItemToPlayer(playerId: string, itemName: string) {
+export async function addItemToPlayer(playerId: string, itemName: string, itemType?: string) {
   const item = await prisma.item.findFirst({
     where: { playerId, name: itemName },
   });
@@ -16,6 +16,7 @@ export async function addItemToPlayer(playerId: string, itemName: string) {
       data: {
         name: itemName,
         count: 1,
+        type: itemType,
         playerId
       }
     });

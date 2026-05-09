@@ -12,7 +12,7 @@ export default class TesteCommand extends Command {
       dev: false,
     })
   }
-  async execute({ client, messageObj, args }: CommandExecuteOptions) {
+  async execute({ client, messageObj }: CommandExecuteOptions) {
     const mapInfo = maps.list.find(m => m.id === 1)
     const mapWithoutChanges = mapInfo.mapAsArray
     const playerEmoji = "🧙🏻‍♂️"

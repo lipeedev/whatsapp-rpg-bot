@@ -1,8 +1,10 @@
+import { PlayerClassType } from "./classes"
+
 export enum ShopItemType {
   Sword,
   Shield,
   Ticket,
-  Potion
+  Skin
 }
 
 export type ShopItem = {
@@ -12,6 +14,7 @@ export type ShopItem = {
   price: number,
   damage?: number,
   protection?: number
+  requiredPlayerClass?: PlayerClassType
 }
 
 export const shopItems: ShopItem[] = [
@@ -99,9 +102,73 @@ export const shopItems: ShopItem[] = [
     price: 1000,
   },
   {
-    name: 'Cura Mágica das Fadas',
-    emoji: '🧪',
-    type: ShopItemType.Potion,
-    price: 1000,
-  }
+    name: 'Ranger',
+    emoji: '🐊⛓️‍💥',
+    type: ShopItemType.Skin,
+    price: 500,
+    requiredPlayerClass: PlayerClassType.Knight
+  },
+  {
+    name: 'Cinder',
+    emoji: '👁️‍🗨️⛓️‍💥',
+    type: ShopItemType.Skin,
+    price: 500,
+    requiredPlayerClass: PlayerClassType.Knight
+  },
+  {
+    name: 'Scar',
+    emoji: '🌀⛓️‍💥',
+    type: ShopItemType.Skin,
+    price: 500,
+    requiredPlayerClass: PlayerClassType.Knight
+  },
+  {
+    name: 'Orion',
+    emoji: '🪐⛓️‍💥',
+    type: ShopItemType.Skin,
+    price: 700,
+    requiredPlayerClass: PlayerClassType.Knight
+  },
+  {
+    name: 'Artorian',
+    emoji: '🦁⛓️‍💥',
+    type: ShopItemType.Skin,
+    price: 700,
+    requiredPlayerClass: PlayerClassType.Knight
+  },
+  {
+    name: 'Aether',
+    emoji: '❄️✨',
+    type: ShopItemType.Skin,
+    price: 500,
+    requiredPlayerClass: PlayerClassType.Wizard
+  },
+  {
+    name: 'Ignis',
+    emoji: '🔥✨',
+    type: ShopItemType.Skin,
+    price: 500,
+    requiredPlayerClass: PlayerClassType.Wizard
+  },
+  {
+    name: 'Sage',
+    emoji: '🌲✨',
+    type: ShopItemType.Skin,
+    price: 500,
+    requiredPlayerClass: PlayerClassType.Wizard
+  },
+  {
+    name: 'Royal',
+    emoji: '👑✨',
+    type: ShopItemType.Skin,
+    price: 700,
+    requiredPlayerClass: PlayerClassType.Wizard
+  },
+  {
+    name: 'Pegasus',
+    emoji: '🦄✨',
+    type: ShopItemType.Skin,
+    price: 700,
+    requiredPlayerClass: PlayerClassType.Wizard
+  },
 ]
