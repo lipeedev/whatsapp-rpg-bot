@@ -77,7 +77,7 @@ export default class StatsCommand extends Command {
     ctx.strokeText(classTitle, classTitlePositionX, 175);
 
     await client.sendMessage(messageObj.key.remoteJid, {
-      image: await canvas.toBuffer('png')
+      image: await canvas.toBuffer('webp', { quality: 0.7 })
     }, { quoted: messageObj as WAMessage })
 
   }

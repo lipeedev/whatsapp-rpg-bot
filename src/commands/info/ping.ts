@@ -1,5 +1,6 @@
 import { WAMessage } from "@whiskeysockets/baileys";
 import { Command, CommandExecuteOptions } from "../../structures";
+import { formatDuration } from "../../utils";
 
 export default class PingCommand extends Command {
   constructor() {
@@ -21,7 +22,7 @@ export default class PingCommand extends Command {
     const ping = end - start;
 
     await client.sendMessage(messageObj.key.remoteJid, {
-      text: `📶 | Latência:  *${ping}ms*\n🟢 | Uptime: *${process.uptime?.()?.toFixed(2)}s*`,
+      text: `📶 | Latência:  *${ping}ms*\n🟢 | Uptime: *${formatDuration(process.uptime?.() * 1000)}*`,
       edit: sentMsg.key
     });
 
