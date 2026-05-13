@@ -10,6 +10,9 @@ type MessageEventObject = {
 }
 
 const cachedPlayers: string[] = []
+const cooldownList = new Map<string, number>()
+const cooldownTime = 1_000 * 60 * 1
+const cooldownInMinutes = cooldownTime / (1_000 * 60)
 
 export default {
   name: 'messages.upsert',
@@ -27,6 +30,8 @@ export default {
     const command = commands.get(commandName) ?? [...commands.values()].find(cmd => cmd.aliases?.includes(commandName));
 
     if (!command) return;
+
+    if (Date.now() <= cooldownList.get(messageObj.key.participant)) return;
 
     try {
       if (command.dev && messageObj.key.participant !== botConfig.developer.id) {
@@ -55,6 +60,13 @@ export default {
       }
 
       await command.execute({ client, messageObj, args });
+
+      cooldownList.set(messageObj.key.participant, Date.now() + cooldownTime)
+      await client.sendMessage(
+        messageObj.key.remoteJid,
+        { text: `[❕] *${cooldownInMinutes} min* para usar comandos novamente.` },
+        { quoted: messageObj as WAMessage }
+      );
     } catch (err) {
       console.error(err)
       await client.sendMessage(

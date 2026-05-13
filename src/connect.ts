@@ -17,7 +17,7 @@ export async function connect() {
     auth: state,
     printQRInTerminal: false,
     logger,
-    browser: Browsers.windows('Firefox'),
+    browser: Browsers.macOS('Safari'),
     syncFullHistory: false,
     shouldSyncHistoryMessage: () => false,
     markOnlineOnConnect: false
