@@ -1,10 +1,7 @@
-import { Command, CommandExecuteOptions } from "../../structures";
-import { UniversalCache } from 'youtubei.js';
-import { Innertube, Platform, Types } from 'youtubei.js/web';
+import { Command, CommandExecuteOptions, yt } from "../../structures";
 import constants from "../../utils/constants";
 import { collectAnswer, truncateString } from "../../utils";
 import { WAMessage } from "@whiskeysockets/baileys";
-import { evaluate } from 'jintr'
 
 export default class YoutubeCommand extends Command {
   constructor() {
@@ -21,16 +18,6 @@ export default class YoutubeCommand extends Command {
     const videoTitleFromUser = args.join(' ').trim();
 
     try {
-      Platform.shim.eval = async (data: Types.BuildScriptResult) => {
-        return new Function(data.output)();;
-      };
-
-      const yt = await Innertube.create({
-        cache: new UniversalCache(false),
-        generate_session_locally: true,
-        eval: evaluate
-      });
-
       const search = await yt.search(videoTitleFromUser, { type: 'video' });
       const videos = search.results.slice(0, 10);
 
@@ -68,8 +55,7 @@ export default class YoutubeCommand extends Command {
         edit: msgResponse.key
       });
 
-      // 6. Processamento do Stream
-      const stream = await yt.download(selectedVideo.id, {
+      const stream = await yt.download(selectedVideo['id'], {
         type: 'video+audio',
         quality: '360p',
         format: 'mp4'

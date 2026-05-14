@@ -1,10 +1,9 @@
 declare global {
-    namespace NodeJS {
-        interface ProcessEnv {
-            MONGO_URL: string;
-            ENV: string
-        }
+  namespace NodeJS {
+    interface ProcessEnv {
+      PREFIX: string;
     }
+  }
 }
 
 export { };

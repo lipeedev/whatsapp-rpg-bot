@@ -6,6 +6,7 @@ import { Boom } from "@hapi/boom";
 import { spawn } from "child_process";
 
 export async function connect() {
+
   const { state, saveCreds } = await useMultiFileAuthState("./cache");
   const { version } = await fetchLatestBaileysVersion()
 

@@ -2,6 +2,10 @@ import { readdirSync } from 'fs';
 import path from 'path';
 import { connect } from './connect';
 import { Command } from './structures/Command';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export const commands = new Map<string, Command>();
 
