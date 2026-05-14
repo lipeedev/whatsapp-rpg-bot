@@ -8,6 +8,7 @@ export default {
   genericErrorMessage: '*[❗] Ocorreu um erro.*',
   insufficientMoney: '*[❕] Estrelas insuficientes.*',
   notFoundItemOnInventory: '*[❕] Você não possui esse item!*',
+  videoNotFound: '*[❕] Sem resultados!*',
   shopItemNotFound: '*[❕] Item não encontrado na loja.*',
   alreadyHasItem: '*[❕] Já possui este item!*',
   successBuyItem: (itemName: string) => `*[🎉] Você realizou uma compra!*\n> Item: \`${itemName}\``,

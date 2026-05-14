@@ -3,6 +3,7 @@ import { commands } from '../bot';
 import { botConfig } from '../structures/bot-config';
 import constants from '../utils/constants';
 import { prisma } from '../structures';
+import { formatDuration } from '../utils';
 
 type MessageEventObject = {
   messages: proto.IWebMessageInfo[],
@@ -12,7 +13,6 @@ type MessageEventObject = {
 const cachedPlayers: string[] = []
 const cooldownList = new Map<string, number>()
 const cooldownTime = 1_000 * 60 * 1
-const cooldownInMinutes = cooldownTime / (1_000 * 60)
 
 export default {
   name: 'messages.upsert',
@@ -64,11 +64,11 @@ export default {
       cooldownList.set(messageObj.key.participant, Date.now() + cooldownTime)
       await client.sendMessage(
         messageObj.key.remoteJid,
-        { text: `[❕] *${cooldownInMinutes} min* para usar comandos novamente.` },
+        { text: `[❕] *${formatDuration(cooldownTime)}* para usar comandos novamente.` },
         { quoted: messageObj as WAMessage }
       );
     } catch (err) {
-      console.error(err)
+      console.error(err.title)
       await client.sendMessage(
         messageObj.key.remoteJid,
         { text: constants.genericErrorMessage },
